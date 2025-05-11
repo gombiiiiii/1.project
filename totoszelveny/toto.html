@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Totó</title>
+    <style>
+/*         
+        .szelveny { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-bottom: 20px; }
+        .meccs { display: flex; justify-content: space-between; align-items: center; padding: 5px; border-bottom: 1px solid #ccc; }
+        .tippek button { width: 30px; height: 30px; margin-right: 5px; cursor: pointer; }
+        .eredmenyek { margin-top: 20px; border-collapse: collapse; width: 80%; }
+        .eredmenyek th, .eredmenyek td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        .talalat { font-weight: bold; color: green; } */
+
+        
+        body {
+            font-family: Inter,sans-serif !important;
+            /* height: 100vh; overflow: hidden; */
+            text-align: center; /* Középre igazítja a szöveget és az inline/inline-block elemeket */
+            background-color: rgba(25,25,33);
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Most jön a login css */
+
+        .box-container {
+
+            position: relative;
+
+            overflow: hidden;
+
+            transition: all 0.3s ease-in-out;
+
+            width: 150px;
+
+            height: 50px;
+
+            border-radius: 5px;
+
+            background-color: #333;
+
+            color: white;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            cursor: pointer;
+
+            padding: 10px;
+
+            margin: 20px auto;
+
+        }
+
+
+
+.box-container:hover {
+
+width: 300px;
+
+height: auto;
+
+padding: 40px;
+
+flex-direction: column;
+
+align-items: flex-start;
+
+}
+
+
+
+.box-container:hover .login-text {
+
+display: none;
+
+}
+
+
+
+.input-field {
+
+margin-bottom: 10px;
+
+padding: 8px;
+
+border: 1px solid #555;
+
+border-radius: 3px;
+
+width: 100%;
+
+box-sizing: border-box;
+
+color: #333;
+
+}
+
+
+
+.login-button {
+
+background-color: #5cb85c;
+
+color: white;
+
+padding: 10px 15px;
+
+border: none;
+
+border-radius: 3px;
+
+cursor: pointer;
+
+width: 100%;
+
+}
+
+
+
+.login-button:hover {
+
+background-color: #4cae4c;
+
+}
+
+
+
+.login-fields {
+
+display: none;
+
+width: 100%;
+
+}
+
+
+
+.box-container:hover .login-fields {
+
+display: flex;
+
+flex-direction: column;
+
+}
+
+
+
+.border-line {
+
+position: absolute;
+
+background-color: transparent;
+
+}
+
+
+
+.top, .bottom {
+
+left: 0;
+
+width: 100%;
+
+height: 3px;
+
+}
+
+
+
+.top {
+
+top: 0;
+
+}
+
+
+
+.bottom {
+
+bottom: 0;
+
+}
+
+
+
+.left, .right {
+
+top: 0;
+
+height: 100%;
+
+width: 3px;
+
+}
+
+
+
+.left {
+
+left: 0;
+
+}
+
+
+
+.right {
+
+right: 0;
+
+}
+
+
+
+/* Animált border (folyamatos színátmenet) */
+
+.box-container:hover .top {
+
+background-image: linear-gradient(to right, lime, yellow, cyan, lime);
+
+background-size: 200% 100%;
+
+animation: border-animation-horizontal-flow 4s linear infinite;
+
+}
+
+
+
+.box-container:hover .bottom {
+
+background-image: linear-gradient(to left, lime, yellow, cyan, lime); /* Ellentétes irány a jobb hatásért */
+
+background-size: 200% 100%;
+
+animation: border-animation-horizontal-flow 4s linear infinite;
+
+}
+
+
+
+.box-container:hover .left {
+
+background-image: linear-gradient(to bottom, lime, yellow, cyan, lime);
+
+background-size: 100% 200%;
+
+animation: border-animation-vertical-flow 4s linear infinite;
+
+}
+
+
+
+.box-container:hover .right {
+
+background-image: linear-gradient(to top, lime, yellow, cyan, lime); /* Ellentétes irány a jobb hatásért */
+
+background-size: 100% 200%;
+
+animation: border-animation-vertical-flow 4s linear infinite;
+
+}
+
+
+
+@keyframes border-animation-horizontal-flow {
+
+0% { background-position: 0% 0%; }
+
+100% { background-position: 100% 0%; }
+
+}
+
+
+
+@keyframes border-animation-vertical-flow {
+
+0% { background-position: 0% 0%; }
+
+100% { background-position: 0% 100%; }
+
+}
+
+        /* Login css cége */
+
+        #jatszabalyok,
+        #eletkor-bekero,
+        #tipp-valasztas,
+        #toto-jatek,
+        #eredmeny-terulet,
+        #feltetelek-elfogadas {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 10px; /* Opcionális: lekerekített sarkok a dobozokhoz */
+            margin-bottom: 15px; /* Kis térköz a dobozok között */
+        }
+
+        #toto-jatek {
+            background: linear-gradient(to right, rgba(130, 104, 254, 0.2), rgba(120, 191, 238, 0.2)); /* Áttetsző színátmenetes háttér */
+            padding: 20px; /* Térköz a dobozban */
+            margin-top: 20px; /* Távolság a felette lévő elemektől */
+        }
+        #toto-jatek h2 {
+            background-color: rgba(255, 255, 255, 0.8); /* Fehér, áttetsző háttér a szöveg körül */
+            padding: 10px 20px; /* Térköz a szöveg körül */
+            border-radius: 5px; /* Lekerekített sarkok a szöveg hátteréhez */
+            display: inline-block; /* Hogy csak a szöveg szélességéig terjedjen */
+            margin-bottom: 20px; /* Távolság a szöveg és a szelvény között */
+            color: black; /* Fekete szövegszín a jobb olvashatóságért */
+            -webkit-background-clip: initial; /* Visszaállítjuk, hogy a háttér valóban háttér legyen */
+            color: black; /* A színátmenet helyett fekete szöveg */
+        }
+        #jatszabalyok li {
+            margin-bottom: 5px; 
+            font-weight: bold; 
+            color:  rgb(120, 191, 238); 
+            background-color: rgb(130, 104, 254),;            
+           
+        }
+        .szelveny {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Reszponzívabb elrendezés */
+            gap: 10px;
+            margin-bottom: 20px;
+            text-align: center; /* A gombok és a szöveg is középre kerüljön a cellákban */
+        }
+        .meccs {
+            display: flex;
+            flex-direction: column; /* A szöveg és a gombok egymás alatt legyenek */
+            align-items: center; /* A gombok és a szöveg középre igazítása függőlegesen */
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .tippek button {
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .eredmenyek {
+            margin: 20px auto; /* Felső/alsó margó 20px, bal/jobb automatikus a középre igazításhoz */
+            border-collapse: collapse;
+            width: 80%; /* Tartsd meg a szélességet, ha szeretnéd korlátozni */
+        }
+        .eredmenyek th,
+        .eredmenyek td {
+            background-color: rgb(130, 104, 254),;            
+            border: 1px solid rgb(120, 191, 238);
+            padding: 10px 20px; 
+            text-align: center;
+            font-weight: bold; 
+            color: #f0f0f0;
+        }
+        .talalat {
+            font-weight: bold;
+            color: green;
+        }
+        h1, h2 , p {
+            text-align: center; /* A főcímek is középre */
+            background: linear-gradient(to right, rgb(130, 104, 254), rgb(120, 191, 238));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        #toto-jatek > button { /* Kiválasztjuk a Lejátszás gombot a toto-jatek div-en belül */
+            padding: 15px 30px; /* Nagyobb térköz a gomb körül */
+            font-size: 1.2em; /* Nagyobb betűméret */
+            border: none; /* Nincs alapértelmezett keret */
+            border-radius: 10px; /* Lekerekített sarkok */
+            cursor: pointer;
+            background: linear-gradient(to right, rgb(130, 104, 254), rgb(120, 191, 238)); /* Színátmenetes háttér */
+            color: white; /* Fehér szövegszín a jobb láthatóságért */
+            margin-top: 20px; /* Távolság a többi elemektől */
+        }
+
+        #eletkor-bekero > button { /* Ellenőriz gomb stílusa */
+            padding: 10px 20px; /* Kisebb padding, hogy ne legyen túl nagy az életkor beviteli mezőhöz képest */
+            font-size: 2em;
+            border: none;
+            border-radius: 5px; /* Kisebb lekerekítés */
+            cursor: pointer;
+            background: linear-gradient(to right, rgb(130, 104, 254), rgb(120, 191, 238));
+            color: white;
+            margin-left: 10px; /* Távolság az input mezőtől */
+        }
+        
+        label { /* Label stílusa */
+            background: linear-gradient(to right, rgb(130, 104, 254), rgb(120, 191, 238));
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 1.1em; /* Kissé nagyobb betűméret a jobb láthatóságért */
+            font-weight: bold; /* Félkövér betűk a kiemeléshez */
+        }
+
+        #tipp-valasztas > button { /* "Én tippelek" és "Gép tippeljen" gombok stílusa */
+            padding: 12px 25px;
+            font-size: 2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: linear-gradient(to right, rgb(130, 104, 254), rgb(120, 191, 238));
+            color: white;
+            margin: 10px; /* Távolság a gombok között */
+        }
+
+        #jatszabalyok ul {
+            list-style-type: disc; /* Szimpla kör jelölők */
+            padding-left: 20px; /* Behúzás a jelölők miatt */
+        }
+        #jatszabalyok li {
+            margin-bottom: 5px; /* Kis térköz a lista elemek között */
+        }
+
+        #nyeremeny-uzenet {
+            font-size: 1.5em; /* Például 1.5-szeresére növeli a betűméretet */
+            font-weight: bold; /* Esetleg félkövérré is tehetjük a kiemeléshez */
+            color: gold; /* Egy figyelemfelkeltő szín, de bármi lehet */
+            margin-top: 10px; /* Kis térköz a felette lévő elemektől */
+        }
+
+        /*   Teszt          */
+        
+         .drac-btn,.drac-heading,.drac-input,.drac-select,.drac-text {  }
+        .progressa{border-radius: 50px !important;height: 35px;line-height: 29px;font-size: 13px;overflow: hidden;margin-bottom: calc(var(--spacing-md) - 5px);background-color: rgba(0,0,0,0.5);-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);border: 3px solid transparent;}
+    .progressab{background-image: -webkit-linear-gradient(45deg,rgba(0,0,0,0.05) 25%,transparent 25%,transparent 50%,rgba(0,0,0,0.05) 50%,rgba(0,0,0,0.05) 75%,transparent 75%,transparent);background-image: -o-linear-gradient(45deg,rgba(0,0,0,0.05) 25%,transparent 25%,transparent 50%,rgba(0,0,0,0.05) 50%,rgba(0,0,0,0.05) 75%,transparent 75%,transparent);-webkit-background-size: 40px 40px;background-size: 40px 40px;-webkit-transition: width .25s ease,height .25s ease,font-size .25s ease;-moz-transition: width .25s ease,height .25s ease,font-size .25s ease;-ms-transition: width .25s ease,height .25s ease,font-size .25s ease;-o-transition: width .25s ease,height .25s ease,font-size .25s ease;transition: width .25s ease,height .25s ease,font-size .25s ease;width: 0;color: black;text-align: center;text-shadow: 0px 1px 3px white;font-weight: 600;font-family: 'Inter',sans-serif !important;animation: progress-bar-stripes 2s linear infinite reverse;}
+     
+
+    </style>
+</head>
+<body>
+    <h1>Totó</h1>
+
+    <div class="box-container">
+        <span class="login-text">Bejelentkezés</span>
+        <div class="login-fields">
+            <input type="text" class="input-field" placeholder="Felhasználónév">
+            <input type="password" class="input-field" placeholder="Jelszó">
+            <button class="login-button">Belépés</button>
+        </div>
+        <div class="border-line top"></div>
+        <div class="border-line bottom"></div>
+        <div class="border-line left"></div>
+        <div class="border-line right"></div>
+    </div>
+
+    <div id="jatszabalyok">
+        <h2>Játékszabályok</h2>
+        <p>A totó egy olyan szerencsejáték, ahol 14 mérkőzés eredményét kell megtippelni.</p>
+        <p>A lehetséges tippek a következők:</p>
+        <ul>
+            <li><strong>X:</strong> Döntetlen</li>
+            <li><strong>1:</strong> Hazai csapat győzelme</li>
+            <li><strong>2:</strong> Vendég csapat győzelme</li>
+        </ul>
+        <p>Ön akkor nyer, ha legalább 10 mérkőzés eredményét helyesen tippelte meg a 13 alap mérkőzésből.</p>
+        <p>Ha mind a 13 alap mérkőzés eredményét eltalálja, lehetősége van a +1 mérkőzés eredményének eltalálására is, ami még nagyobb nyereményt jelenthet.</p>
+        <p>A találatait a mérkőzések mellett egy '*' szimbólum jelzi az eredmények megtekintésekor.</p>
+    </div>
+
+    <div id="feltetelek-elfogadas">
+        <label class="szinatmenetes-szoveg">
+            <input type="checkbox" id="feltetelek"> Elfogadom a
+            <a href="aszf.html" target="_blank" class="szinatmenetes-szoveg">feltételeket és az ÁSZF-et</a>
+        </label>
+        <p id="feltetelek-uzenet" style="color: red; display: none;">Kérjük, fogadja el a feltételeket!</p>
+    </div>
+
+    <!-- <div id="eletkor-bekero">
+        <label for="eletkor">Kérem adja meg az életkorát:</label>
+        <input type="number" id="eletkor" min="0" max="120">
+        <button onclick="ellenorizEletkor()">Ellenőriz</button>
+        <p id="eletkor-uzenet"></p>
+    </div> -->
+
+    <div id="eletkor-bekero" style="display: none;">
+        <label for="eletkor" class="szinatmenetes-szoveg">Kérem adja meg az életkorát:</label>
+        <input type="number" id="eletkor" min="0" max="120">
+        <button onclick="ellenorizFeltetelekEsEletkor()">Ellenőriz</button>
+        <p id="eletkor-uzenet"></p>
+    </div>
+
+    <div id="tipp-valasztas" style="display: none;">
+        <h2>Hogyan szeretne játszani?</h2>
+        <button onclick="mutasdTippeloFeluletet()">Én tippelek</button>
+        <button onclick="gepTippeljen()">Gép tippeljen</button>
+    </div>
+
+    <div id="toto-jatek" style="display: none;">
+        <h2>Tippelje meg a mérkőzések eredményeit!</h2>
+        <div id="szelveny" class="szelveny">
+            </div>
+        <button onclick="jatsz()">Játék</button>
+    </div>
+
+    <div id="eredmeny-terulet" style="display: none;">
+        <h2>Eredmények</h2>
+        <table id="eredmenyek" class="eredmenyek">
+            <thead>
+                <tr>
+                    <th>Mérkőzés</th>
+                    <th>Tipp</th>
+                    <th>Eredmény</th>
+                    <th>Találat</th>
+                </tr>
+            </thead>
+            <tbody id="eredmeny-tabla">
+            </tbody>
+        </table>
+        <p id="nyeremeny-uzenet"></p>
+    </div>
+
+    <script>
+        let eletkorEllenorzott = false;
+        let tippek = [];
+        let nyeroszamok = [];
+
+        const eletkorBekeroElem = document.getElementById("eletkor-bekero");
+        const tippValasztasElem = document.getElementById("tipp-valasztas");
+        const totoJatekElem = document.getElementById("toto-jatek");
+        const szelvenyElem = document.getElementById("szelveny");
+        const feltetelekCheckbox = document.getElementById("feltetelek");
+        const feltetelekUzenetElem = document.getElementById("feltetelek-uzenet");
+        const feltetelekElfogadasElem = document.getElementById("feltetelek-elfogadas");
+        const ellenorizGombElem = document.querySelector("#eletkor-bekero > button"); // Hozzáadjuk az Ellenőriz gomb elemét
+
+
+        // Az életkor bekérő és a tippválasztó alapértelmezés szerint rejtve van
+        eletkorBekeroElem.style.display = "none";
+        tippValasztasElem.style.display = "none";
+
+        feltetelekCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                feltetelekUzenetElem.style.display = "none";
+                feltetelekElfogadasElem.style.display = "none";
+                eletkorBekeroElem.style.display = "block";
+            } else {
+                eletkorBekeroElem.style.display = "none"; // Ha visszavonják a pipát, az életkor bekérő is tűnjön el (opcionális)
+            }
+        });
+
+        function ellenorizFeltetelekEsEletkor() {
+            if (!feltetelekCheckbox.checked) {
+                feltetelekUzenetElem.style.display = "block";
+                eletkorBekeroElem.style.display = "block"; 
+                return;
+            } else {
+                feltetelekUzenetElem.style.display = "none";
+                feltetelekElfogadasElem.style.display = "none"; // Csak a feltételek div-et rejtjük el
+                eletkorBekeroElem.style.display = "block";   // És megjelenítjük az életkor bekérőt
+
+                const eletkorInput = document.getElementById("eletkor");
+                const eletkorUzenet = document.getElementById("eletkor-uzenet");
+                const age = parseInt(eletkorInput.value);
+
+                if (isNaN(age) || age < 0 || age > 120) {
+                    eletkorUzenet.textContent = "Kérem adja meg a valós életkorát!";
+                    eletkorEllenorzott = false;
+                } else if (age < 18) {
+                    eletkorUzenet.textContent = "Hozzáférés megtagadva! Szerencsejátékhoz legalább a 18. életévedet be kell töltened.";
+                    eletkorEllenorzott = false;
+                } else {
+                    eletkorUzenet.textContent = "Megfelelő életkor!";
+                    eletkorEllenorzott = true;
+                    eletkorBekeroElem.style.display = "none";
+                    tippValasztasElem.style.display = "block";
+                }
+            }
+        }
+
+
+        function mutasdTippeloFeluletet() {
+            tippValasztasElem.style.display = "none";
+            totoJatekElem.style.display = "block";
+            szelvenyGeneralas();
+        }
+
+        function szelvenyGeneralas() {
+            szelvenyElem.innerHTML = ""; // Töröljük az előző tartalmat
+            tippek = Array(14).fill(null); // Inicializáljuk a tippeket null értékkel
+            for (let i = 0; i < 14; i++) {
+                const meccsDiv = document.createElement("div");
+                meccsDiv.classList.add("meccs");
+                meccsDiv.innerHTML = `<span>${i + 1}. mérkőzés:</span><div class="tippek"><button onclick="tippel(${i}, 0)">X</button><button onclick="tippel(${i}, 1)">1</button><button onclick="tippel(${i}, 2)">2</button></div><span id="tipp-${i}">-</span>`;
+                szelvenyElem.appendChild(meccsDiv);
+            }
+        }
+
+        function tippel(index, tipp) {
+            tippek[index] = tipp;
+            const tippElem = document.getElementById(`tipp-${index}`);
+            if (tipp === 0) tippElem.textContent = "X";
+            else tippElem.textContent = tipp;
+        }
+
+        function gepTippeljen() {
+            tippValasztasElem.style.display = "none";
+            totoJatekElem.style.display = "block";
+            szelvenyElem.innerHTML = ""; // Töröljük az előző tartalmat
+            tippek = [];
+            for (let i = 0; i < 14; i++) {
+                const veletlenTipp = Math.floor(Math.random() * 3);
+                tippek.push(veletlenTipp);
+                const meccsDiv = document.createElement("div");
+                meccsDiv.classList.add("meccs");
+                meccsDiv.innerHTML = `<span>${i + 1}. mérkőzés:</span><span>${tippSzoveg(veletlenTipp)}</span>`;
+                szelvenyElem.appendChild(meccsDiv);
+            }
+            // Itt esetleg megjeleníthetnénk egy "Játék" gombot, ha még nincs ott
+            if (!document.querySelector("#toto-jatek > button")) {
+                const lejatszasGomb = document.createElement("button");
+                lejatszasGomb.textContent = "Játék";
+                lejatszasGomb.onclick = jatsz;
+                totoJatekElem.appendChild(lejatszasGomb);
+            }
+        }
+
+        function nyeroszamokGeneralas() {
+            const nyeroSzamok = [];
+            for (let i = 0; i < 14; i++) {
+                nyeroSzamok.push(Math.floor(Math.random() * 3)); // 0, 1 vagy 2
+            }
+            return nyeroSzamok;
+        }
+
+        function jatsz() {
+            if (!tippek.every(tipp => tipp !== null)) {
+                alert("Kérem, tippeljen meg minden mérkőzést!");
+                return;
+            }
+
+            nyeroszamok = nyeroszamokGeneralas();
+            osszeHasonlit();
+        }
+
+        function osszeHasonlit() {
+            const eredmenyTablaBody = document.getElementById("eredmeny-tabla");
+            const nyeremenyUzenet = document.getElementById("nyeremeny-uzenet");
+            const eredmenyTerulet = document.getElementById("eredmeny-terulet");
+            eredmenyTablaBody.innerHTML = "";
+            let talalat = 0;
+            let tizenharomTalalat = 0;
+
+            for (let i = 0; i < 13; i++) {
+                const row = eredmenyTablaBody.insertRow();
+                const meccsCell = row.insertCell();
+                const tippCell = row.insertCell();
+                const eredmenyCell = row.insertCell();
+                const talalatCell = row.insertCell();
+
+                meccsCell.textContent = `${i + 1}. mérkőzés`;
+                tippCell.textContent = tippSzoveg(tippek[i]);
+                eredmenyCell.textContent = tippSzoveg(nyeroszamok[i]);
+                if (tippek[i] === nyeroszamok[i]) {
+                    talalatCell.textContent = "*";
+                    talalatCell.classList.add("talalat");
+                    tizenharomTalalat++;
+                } else {
+                    talalatCell.textContent = " ";
+                }
+            }
+
+            // +1 mérkőzés
+            const utolsoSor = eredmenyTablaBody.insertRow();
+            const utolsoMeccsCell = utolsoSor.insertCell();
+            const utolsoTippCell = utolsoSor.insertCell();
+            const utolsoEredmenyCell = utolsoSor.insertCell();
+            const utolsoTalalatCell = utolsoSor.insertCell();
+
+            utolsoMeccsCell.textContent = "14. mérkőzés (+1)";
+            utolsoTippCell.textContent = tippSzoveg(tippek[13]);
+            utolsoEredmenyCell.textContent = tippSzoveg(nyeroszamok[13]);
+            if (tippek[13] === nyeroszamok[13]) {
+                utolsoTalalatCell.textContent = "*";
+                utolsoTalalatCell.classList.add("talalat");
+                talalat++;
+            } else {
+                utolsoTalalatCell.textContent = " ";
+            }
+
+            eredmenyTerulet.style.display = "block";
+
+            if (tizenharomTalalat >= 10 && tizenharomTalalat <= 12) {
+                nyeremenyUzenet.textContent = `Gratulálunk, ön nyert! Önnek 13-ból ${tizenharomTalalat} találata volt.`;
+            } else if (tizenharomTalalat === 13 && talalat === 14) {
+                nyeremenyUzenet.textContent = "Gratulálunk, ön nyert! Önnek 13+1 találata volt!";
+            } else if (tizenharomTalalat === 13 && talalat === 13) {
+                nyeremenyUzenet.textContent = "Gratulálunk, ön nyert! Önnek 13 találata volt!";
+            }
+             else {
+                nyeremenyUzenet.textContent = `Ön sajnos nem nyert! Önnek csupán ${tizenharomTalalat} találata volt.`;
+            }
+        }
+
+        function tippSzoveg(tipp) {
+            if (tipp === 0) return "X";
+            else return tipp;
+        }
+    </script>
+</body>
+</html>
