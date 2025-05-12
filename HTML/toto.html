@@ -13,6 +13,8 @@
         .eredmenyek th, .eredmenyek td { border: 1px solid #ccc; padding: 8px; text-align: center; }
         .talalat { font-weight: bold; color: green; } */
 
+
+        
         
         body {
             font-family: Inter,sans-serif !important;
@@ -415,6 +417,7 @@ animation: border-animation-vertical-flow 4s linear infinite;
         #jatszabalyok ul {
             list-style-type: disc; /* Szimpla kör jelölők */
             padding-left: 20px; /* Behúzás a jelölők miatt */
+            list-style-type: "🍀";
         }
         #jatszabalyok li {
             margin-bottom: 5px; /* Kis térköz a lista elemek között */
@@ -432,11 +435,146 @@ animation: border-animation-vertical-flow 4s linear infinite;
          .drac-btn,.drac-heading,.drac-input,.drac-select,.drac-text {  }
         .progressa{border-radius: 50px !important;height: 35px;line-height: 29px;font-size: 13px;overflow: hidden;margin-bottom: calc(var(--spacing-md) - 5px);background-color: rgba(0,0,0,0.5);-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);border: 3px solid transparent;}
     .progressab{background-image: -webkit-linear-gradient(45deg,rgba(0,0,0,0.05) 25%,transparent 25%,transparent 50%,rgba(0,0,0,0.05) 50%,rgba(0,0,0,0.05) 75%,transparent 75%,transparent);background-image: -o-linear-gradient(45deg,rgba(0,0,0,0.05) 25%,transparent 25%,transparent 50%,rgba(0,0,0,0.05) 50%,rgba(0,0,0,0.05) 75%,transparent 75%,transparent);-webkit-background-size: 40px 40px;background-size: 40px 40px;-webkit-transition: width .25s ease,height .25s ease,font-size .25s ease;-moz-transition: width .25s ease,height .25s ease,font-size .25s ease;-ms-transition: width .25s ease,height .25s ease,font-size .25s ease;-o-transition: width .25s ease,height .25s ease,font-size .25s ease;transition: width .25s ease,height .25s ease,font-size .25s ease;width: 0;color: black;text-align: center;text-shadow: 0px 1px 3px white;font-weight: 600;font-family: 'Inter',sans-serif !important;animation: progress-bar-stripes 2s linear infinite reverse;}
-     
+    
 
+    .footer-links {
+    text-align: center;
+    padding: 10px;
+    background-color: #333; /* Sötét háttér a footernek */
+    color: #f0f0f0; /* Világos szöveg a footerben */
+    position: fixed; /* Rögzített pozíció az alján */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10; /* Hogy a menü fölött legyen, ha átfedné */
+    }
+
+    .footer-links a {
+        color: #f0f0f0;
+        margin: 0 10px;
+        text-decoration: none;
+    }
+
+    .footer-links a:hover {
+        text-decoration: underline;
+    }
+
+    .hamburger-menu {
+        position: fixed; /* Rögzített pozíció a bal oldalon */
+        top: 20px; /* Igazítsd a kívánt pozícióhoz */
+        left: 20px; /* Igazítsd a kívánt pozícióhoz */
+        z-index: 20; /* Hogy a többi elem fölött legyen */
+        cursor: pointer;
+    }
+
+    .hamburger-icon {
+        width: 30px;
+        height: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+
+    .hamburger-icon span {
+        height: 3px;
+        width: 100%;
+        background-color: rgb(120, 191, 238); /* Világos szín az ikonhoz */
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* "X" ikon stílusa */
+    .hamburger-icon.open span:nth-child(1) {
+        transform: translateY(8.5px) rotate(45deg);
+    }
+
+    .hamburger-icon.open span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger-icon.open span:nth-child(3) {
+        transform: translateY(-8.5px) rotate(-45deg);
+    }
+
+    .slide-out-menu {
+        position: fixed;
+        top: 0;
+        left: -300px; /* Kezdetben kívül van a képernyőn */
+        width: 300px;
+        height: 100%;
+        background: linear-gradient(to right, rgb(130, 104, 254), rgb(120, 191, 238));
+        /*background-color: #222;  Sötét háttér a menünek */
+        color: #f0f0f0;
+        padding-top: 60px; /* Hely a hamburger ikonnak */
+        transition: all 0.3s ease-in-out;
+        z-index: 15; /* A hamburger ikon alatt, de a tartalom felett */
+        overflow-y: auto; /* Ha hosszú a menü */
+    }
+
+    .slide-out-menu.open {
+        left: 0; /* Becsúszik a képernyőre */
+    }
+
+    .slide-out-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .slide-out-menu ul li a {
+        display: block;
+        padding: 15px 20px;
+        text-decoration: none;
+        color: white; /* Világos szöveg a menüpontokban */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Világosabb elválasztó vonal */
+    }
+
+    .slide-out-menu ul li a:hover {
+        background-color: rgba(255, 255, 255, 0.1); /* Világosabb hover effekt */
+    }
+
+    .slide-out-menu.open ul li a {
+        color: white; /* Jelenlegi fehér szín */
+    /* Itt adjuk meg az új, sötétszürke színt */
+        color: #242424; /* Például sötétszürke */
+    }
+    /* 
+    .hamburger-menu .hamburger-icon span {
+    background-color: #f0f0f0; 
+    } */
+
+    
+
+
+
+   
     </style>
 </head>
 <body>
+    <div class="hamburger-menu">
+        <div class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="slide-out-menu">
+            <ul>
+                <li><a href="#">Új Tippsor</a></li>
+                <li><a href="#">Gép Tippeljen</a></li>
+                <li><a href="#">Eredmények</a></li>
+                <li><a href="#">Korábbi Tippjeim / Számlám</a></li>
+                <li><a href="#">Bejelentkezés</a></li>
+                <li><a href="nyeremenytabla.html">Nyereménytábla</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <div class="footer-links">
+        <a href="jatszabalyok.html">Játékszabályok</a>
+        <a href="aszf.html">ÁSZF</a>
+        <a href="adatvedelmi_tajekoztato.html">Adatvédelem</a>
+    </div>
+
     <h1>Totó</h1>
 
     <div class="box-container">
@@ -704,6 +842,31 @@ animation: border-animation-vertical-flow 4s linear infinite;
             if (tipp === 0) return "X";
             else return tipp;
         }
+
+        const hamburgerIcon = document.querySelector('.hamburger-icon');
+        const slideOutMenu = document.querySelector('.slide-out-menu');
+        const bejelentkezesLi = slideOutMenu.querySelector('ul li:nth-child(5)'); // Feltételezve, hogy a 5. li a Bejelentkezés
+
+        // Hamburger menü működése
+        hamburgerIcon.addEventListener('click', () => {
+            slideOutMenu.classList.toggle('open');
+            hamburgerIcon.classList.toggle('open');
+        });
+
+        // Bejelentkezés menüpont láthatósága
+        function frissitBejelentkezesLathatosag() {
+            if (window.location.pathname === '/' || window.location.pathname.includes('index.html')) {
+                bejelentkezesLi.style.display = 'none'; // Főoldalon ne jelenjen meg
+            } else {
+                bejelentkezesLi.style.display = 'block'; // Minden más oldalon igen
+            }
+        }
+
+        // Az oldal betöltésekor és navigációkor ellenőrizzük
+        frissitBejelentkezesLathatosag();
+
+        // Ha az egyoldalas navigációt használsz (pl. history API), akkor az oldalváltáskor is hívd meg:
+        // window.addEventListener('popstate', frissitBejelentkezesLathatosag);
     </script>
 </body>
 </html>
