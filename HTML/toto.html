@@ -60,234 +60,175 @@
             margin: 20px auto;
 
         }
+        .box-container:hover {
 
+            width: 300px;
 
+            height: auto;
 
-.box-container:hover {
+            padding: 40px;
 
-width: 300px;
+            flex-direction: column;
 
-height: auto;
+            align-items: flex-start;
 
-padding: 40px;
+        }
+        .box-container:hover .login-text {
 
-flex-direction: column;
+            display: none;
 
-align-items: flex-start;
+        }
+        .input-field {
 
-}
+            margin-bottom: 10px;
 
+            padding: 8px;
 
+            border: 1px solid #555;
 
-.box-container:hover .login-text {
+            border-radius: 3px;
 
-display: none;
+            width: 100%;
 
-}
+            box-sizing: border-box;
 
+            color: #333;
 
+        }
+        .login-button {
 
-.input-field {
+            background-color: #5cb85c;
 
-margin-bottom: 10px;
+            color: white;
 
-padding: 8px;
+            padding: 10px 15px;
 
-border: 1px solid #555;
+            border: none;
 
-border-radius: 3px;
+            border-radius: 3px;
 
-width: 100%;
+            cursor: pointer;
 
-box-sizing: border-box;
+            width: 100%;
 
-color: #333;
+        }
+        .login-button:hover {
 
-}
+            background-color: #4cae4c;
 
+        }
+        .login-fields {
 
+            display: none;
 
-.login-button {
+            width: 100%;
 
-background-color: #5cb85c;
+        }
+        .box-container:hover .login-fields {
 
-color: white;
+            display: flex;
 
-padding: 10px 15px;
+            flex-direction: column;
 
-border: none;
+        }
+        .border-line {
 
-border-radius: 3px;
+            position: absolute;
 
-cursor: pointer;
+            background-color: transparent;
 
-width: 100%;
+        }
+        .top, .bottom {
 
-}
+            left: 0;
 
+            width: 100%;
 
+            height: 3px;
 
-.login-button:hover {
+        }
+        .top {
 
-background-color: #4cae4c;
+            top: 0;
 
-}
+        }
+        .bottom {
 
+            bottom: 0;
 
+        }
+        .left, .right {
 
-.login-fields {
+            top: 0;
 
-display: none;
+            height: 100%;
 
-width: 100%;
+            width: 3px;
 
-}
+        }
+        .left {
 
+            left: 0;
 
+        }
+        .right {
 
-.box-container:hover .login-fields {
+            right: 0;
 
-display: flex;
+        }
 
-flex-direction: column;
+        /* Animált border (folyamatos színátmenet) */
 
-}
+        .box-container:hover .top {
 
+            background-image: linear-gradient(to right, lime, yellow, cyan, lime);
 
+            background-size: 200% 100%;
 
-.border-line {
+            animation: border-animation-horizontal-flow 4s linear infinite;
 
-position: absolute;
+        }
+        .box-container:hover .bottom {
 
-background-color: transparent;
+            background-image: linear-gradient(to left, lime, yellow, cyan, lime); /* Ellentétes irány a jobb hatásért */
 
-}
+            background-size: 200% 100%;
 
+            animation: border-animation-horizontal-flow 4s linear infinite;
 
+        }
+        .box-container:hover .left {
 
-.top, .bottom {
+            background-image: linear-gradient(to bottom, lime, yellow, cyan, lime);
 
-left: 0;
+            background-size: 100% 200%;
 
-width: 100%;
+            animation: border-animation-vertical-flow 4s linear infinite;
 
-height: 3px;
+        }
+        .box-container:hover .right {
 
-}
+        background-image: linear-gradient(to top, lime, yellow, cyan, lime); /* Ellentétes irány a jobb hatásért */
 
+        background-size: 100% 200%;
 
+        animation: border-animation-vertical-flow 4s linear infinite;
 
-.top {
+        }
+        @keyframes border-animation-horizontal-flow {
 
-top: 0;
+        0% { background-position: 0% 0%; }
 
-}
+        100% { background-position: 100% 0%; }
 
+        }
+        @keyframes border-animation-vertical-flow {
 
+        0% { background-position: 0% 0%; }
 
-.bottom {
+        100% { background-position: 0% 100%; }
 
-bottom: 0;
-
-}
-
-
-
-.left, .right {
-
-top: 0;
-
-height: 100%;
-
-width: 3px;
-
-}
-
-
-
-.left {
-
-left: 0;
-
-}
-
-
-
-.right {
-
-right: 0;
-
-}
-
-
-
-/* Animált border (folyamatos színátmenet) */
-
-.box-container:hover .top {
-
-background-image: linear-gradient(to right, lime, yellow, cyan, lime);
-
-background-size: 200% 100%;
-
-animation: border-animation-horizontal-flow 4s linear infinite;
-
-}
-
-
-
-.box-container:hover .bottom {
-
-background-image: linear-gradient(to left, lime, yellow, cyan, lime); /* Ellentétes irány a jobb hatásért */
-
-background-size: 200% 100%;
-
-animation: border-animation-horizontal-flow 4s linear infinite;
-
-}
-
-
-
-.box-container:hover .left {
-
-background-image: linear-gradient(to bottom, lime, yellow, cyan, lime);
-
-background-size: 100% 200%;
-
-animation: border-animation-vertical-flow 4s linear infinite;
-
-}
-
-
-
-.box-container:hover .right {
-
-background-image: linear-gradient(to top, lime, yellow, cyan, lime); /* Ellentétes irány a jobb hatásért */
-
-background-size: 100% 200%;
-
-animation: border-animation-vertical-flow 4s linear infinite;
-
-}
-
-
-
-@keyframes border-animation-horizontal-flow {
-
-0% { background-position: 0% 0%; }
-
-100% { background-position: 100% 0%; }
-
-}
-
-
-
-@keyframes border-animation-vertical-flow {
-
-0% { background-position: 0% 0%; }
-
-100% { background-position: 0% 100%; }
-
-}
+        }
 
         /* Login css cége */
 
@@ -347,6 +288,12 @@ animation: border-animation-vertical-flow 4s linear infinite;
             margin: 5px;
             cursor: pointer;
             font-size: 1em;
+            /* Új stílusok */
+            background: linear-gradient(to right, rgb(130, 104, 254), rgb(120, 191, 238)); /* Színátmenetes háttér */
+            color: black; /* Világos betűszín a színátmeneten jól látszik */
+            font-weight: bold; /* Félkövér betűstílus */
+            border: none; /* Eltávolítjuk az alapértelmezett gomb keretet */
+            border-radius: 5px; /* Lekerekített sarkok (opcionális) */
         }
         .eredmenyek {
             margin: 20px auto; /* Felső/alsó margó 20px, bal/jobb automatikus a középre igazításhoz */
@@ -395,6 +342,16 @@ animation: border-animation-vertical-flow 4s linear infinite;
             margin-left: 10px; /* Távolság az input mezőtől */
         }
         
+        #eletkor {
+            padding: 10px; /* Nagyobb belső térköz */
+            font-size: 1.2em; /* Nagyobb betűméret */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px; /* Még nagyobb szélesség (az eredeti 150px helyett) */
+            box-sizing: border-box;
+            margin-right: 10px; /* Távolság a gombhoz */
+        }
+
         label { /* Label stílusa */
             background: linear-gradient(to right, rgb(130, 104, 254), rgb(120, 191, 238));
             -webkit-background-clip: text;
@@ -434,19 +391,19 @@ animation: border-animation-vertical-flow 4s linear infinite;
         
          .drac-btn,.drac-heading,.drac-input,.drac-select,.drac-text {  }
         .progressa{border-radius: 50px !important;height: 35px;line-height: 29px;font-size: 13px;overflow: hidden;margin-bottom: calc(var(--spacing-md) - 5px);background-color: rgba(0,0,0,0.5);-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);border: 3px solid transparent;}
-    .progressab{background-image: -webkit-linear-gradient(45deg,rgba(0,0,0,0.05) 25%,transparent 25%,transparent 50%,rgba(0,0,0,0.05) 50%,rgba(0,0,0,0.05) 75%,transparent 75%,transparent);background-image: -o-linear-gradient(45deg,rgba(0,0,0,0.05) 25%,transparent 25%,transparent 50%,rgba(0,0,0,0.05) 50%,rgba(0,0,0,0.05) 75%,transparent 75%,transparent);-webkit-background-size: 40px 40px;background-size: 40px 40px;-webkit-transition: width .25s ease,height .25s ease,font-size .25s ease;-moz-transition: width .25s ease,height .25s ease,font-size .25s ease;-ms-transition: width .25s ease,height .25s ease,font-size .25s ease;-o-transition: width .25s ease,height .25s ease,font-size .25s ease;transition: width .25s ease,height .25s ease,font-size .25s ease;width: 0;color: black;text-align: center;text-shadow: 0px 1px 3px white;font-weight: 600;font-family: 'Inter',sans-serif !important;animation: progress-bar-stripes 2s linear infinite reverse;}
+        .progressab{background-image: -webkit-linear-gradient(45deg,rgba(0,0,0,0.05) 25%,transparent 25%,transparent 50%,rgba(0,0,0,0.05) 50%,rgba(0,0,0,0.05) 75%,transparent 75%,transparent);background-image: -o-linear-gradient(45deg,rgba(0,0,0,0.05) 25%,transparent 25%,transparent 50%,rgba(0,0,0,0.05) 50%,rgba(0,0,0,0.05) 75%,transparent 75%,transparent);-webkit-background-size: 40px 40px;background-size: 40px 40px;-webkit-transition: width .25s ease,height .25s ease,font-size .25s ease;-moz-transition: width .25s ease,height .25s ease,font-size .25s ease;-ms-transition: width .25s ease,height .25s ease,font-size .25s ease;-o-transition: width .25s ease,height .25s ease,font-size .25s ease;transition: width .25s ease,height .25s ease,font-size .25s ease;width: 0;color: black;text-align: center;text-shadow: 0px 1px 3px white;font-weight: 600;font-family: 'Inter',sans-serif !important;animation: progress-bar-stripes 2s linear infinite reverse;}
     
 
     .footer-links {
-    text-align: center;
-    padding: 10px;
-    background-color: #333; /* Sötét háttér a footernek */
-    color: #f0f0f0; /* Világos szöveg a footerben */
-    position: fixed; /* Rögzített pozíció az alján */
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10; /* Hogy a menü fölött legyen, ha átfedné */
+        text-align: center;
+        padding: 10px;
+        background-color: #333; /* Sötét háttér a footernek */
+        color: #f0f0f0; /* Világos szöveg a footerben */
+        position: fixed; /* Rögzített pozíció az alján */
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10; /* Hogy a menü fölött legyen, ha átfedné */
     }
 
     .footer-links a {
@@ -540,7 +497,7 @@ animation: border-animation-vertical-flow 4s linear infinite;
     }
     /* 
     .hamburger-menu .hamburger-icon span {
-    background-color: #f0f0f0; 
+        background-color: #f0f0f0; 
     } */
 
     
